@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/charmbracelet/bubbles/textinput"
-	"github.com/charmbracelet/bubbletea"
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 type model struct {
@@ -15,8 +15,12 @@ type model struct {
 }
 
 func New(questions []string) *model {
+	answerField := textinput.New()
+	answerField.Placeholder = "Enter your answer"
+	answerField.Focus()
 	return &model{
-		questions: questions,
+		questions:   questions,
+		answerField: answerField,
 	}
 }
 
@@ -51,7 +55,7 @@ func main() {
 
 	f, err := tea.LogToFile("debug.log", "debug")
 	if err != nil {
-		log.Fatalf("err: %w", err)
+		log.Fatal(err)
 	}
 	defer f.Close()
 
