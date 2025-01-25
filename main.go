@@ -44,11 +44,11 @@ func (m model) Init() tea.Cmd {
 
 func DefaultStyles() *Styles {
 	return &Styles{
-		BorderColor: lipgloss.Color("#000000"),
+		BorderColor: lipgloss.Color("#008000"),
 		TextColor:   lipgloss.Color("#ffffff"),
 		InputField: lipgloss.NewStyle().
 			Border(lipgloss.InnerHalfBlockBorder(), false, false, false, true).
-			BorderForeground(lipgloss.Color("#000000")).
+			BorderForeground(lipgloss.Color("#008000")).
 			Padding(1, 2).
 			Width(100),
 	}
@@ -72,10 +72,16 @@ func (m model) View() string {
 	if m.width == 0 {
 		return "loading"
 	}
-	return lipgloss.JoinVertical(
+	return lipgloss.Place(
+		m.width,
+		m.height,
 		lipgloss.Center,
-		m.questions[m.index],
-		m.styles.InputField.Render(m.answerField.View()),
+		lipgloss.Center,
+		lipgloss.JoinVertical(
+			lipgloss.Center,
+			m.questions[m.index],
+			m.styles.InputField.Render(m.answerField.View()),
+		),
 	)
 }
 

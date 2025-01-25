@@ -3,3 +3,6 @@ debug.log
 
 # Binaries
 k3m
+
+# Air temp files
+tmp/
